@@ -1,4 +1,5 @@
 # MMI
+## Kostenplan
 - Personalkosten ~ 50-60€
 - Versicherungskosten ° 40€ pro Mitarbeiter
 - Lizenzkosten ° 
