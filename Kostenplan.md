@@ -7,3 +7,4 @@
 - Betriebskosten (Miete-Strom-Wasser-Internet) - Miete pro Monat = 30 m² x 15€ = 450 EUR - Stromkosten pro Monat: 450€ / 12 = 37,50€ pro Monat. Wasserverbrauch von 7 m³ pro Monat zu 6€ pro m³: 7 m³ x 6€ = 42€ pro Monat. - Business-Internetanschluss ( 100 Mbit/s): 60€ pro Monat.
 - Sonstige Kosten ° pauschal 50€ pro Mitarbeiter
 - Gewinnspanne 10%-15% von Gesamt 
+
