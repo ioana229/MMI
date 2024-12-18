@@ -1,5 +1,4 @@
-# MMI https://github.com/ioana229/MMI/issues/1
-## Kostenplan 1 Monat Projekt 80 Stunden Aufwand
+# Kostenplan 1 Monat Projekt 80 Stunden Aufwand https://github.com/ioana229/MMI/issues/1
 - Personalkosten ~ 50-60€ pro Stunde
 - Versicherungskosten ° 40€ pro Mitarbeiter
 - Lizenzkosten ° mySQL Enterprise (5000€ / 12Monate pro Mitarbeiter 416,7€)
