@@ -8,7 +8,7 @@
 - Gewinnspanne 10%-15% von Gesamt
 
 # Rechnung
-3x (60€ x 23,33 Stunden + 40€ + 21,83€ + 337,5€ + 28,13€ + 31,5€ + 45€ + 50€) + 5350€
+((3x (60€ x 23,33 Stunden + 40€ + 21,83€ + 337,5€ + 28,13€ + 31,5€ + 45€ + 50€) + 5350€) x 1,10)
 
 # Laufende Kosten 
 Pro Jahr 5350€ MySQL Server
