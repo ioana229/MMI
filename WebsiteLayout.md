@@ -39,3 +39,15 @@
 - &copy 2024 Copyright Area
 
 # FeedView "/{countrCode, e.g. "de"}/feed"
+## Header (Navbar)
+- Nav-Icon
+- Logo
+- Lieferung/Abholen Buttons
+- Choose Location Button/Drowdown on click
+- Input Field: -> Search-Icon (Magnify) -> Placeholder Durchsuche {"FastFood Website Name"}
+- Login Button
+- Register Button
+
+## Sidebar
+- Register Button
+- Login Button
