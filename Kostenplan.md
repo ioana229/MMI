@@ -12,4 +12,5 @@
 
 # Laufende Kosten 
 Pro Jahr 5350€ MySQL Server
+Render Lizenz € pro Monat
 
