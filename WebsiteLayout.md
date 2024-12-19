@@ -5,11 +5,11 @@
 - Login Button
 - Register Button
 
-# Sidebar
+## Sidebar
 - Register Button
 - Login Button
 
-# Main
+## Main
 - Background-Image
 - Text: "Lieferungen in deiner Nähe"
 - Input Field: -> Location-Icon -> Placeholder Text: "Lieferadresse eingeben"
@@ -18,3 +18,22 @@
 - "oder Anmelden" href
 - Cards: Card mit Image, Text, Small Text and href
 - Area für "Länder in denen {"FastFood Website Name"} verfügbar ist"
+- List Countries
+
+## Footer
+- Links:
+- Hilfe erhalten
+- Füge dein Restaurant hinzu
+- Registriere dich als Kurier*in
+- Ein Geschäftskonto anlegen
+- Restaurants in meiner Nähe
+- Alle Städte anzeigen
+- Alle Länder anzeigen
+- Zur Abholung in meiner Nähe
+- Kaufe Lebensmittel ein
+- Über Uber Eats
+- Sprache (Translate-Icon) "Deutsch"
+
+## Sub-Footer
+- Socials-Icons (Facebook, Twitter, Instagram) mit href zu den Konten der Socials
+- &copy 2024 Copyright Area
