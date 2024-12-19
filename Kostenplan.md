@@ -8,9 +8,8 @@
 - Gewinnspanne 10%-15% von Gesamt
 
 # Rechnung
-((3x (60€ x 70 Stunden + 40€ + 21,83€ + 50€) 337,5€ + 28,13€ + 31,5€ + 45€ + 5350€) x 1,10)
+- ((3x (60€ x 70 Stunden + 40€ + 21,83€ + 50€) 337,5€ + 28,13€ + 31,5€ + 45€ + 5350€) x 1,10)
 
 # Laufende Kosten 
-Pro Jahr 5350€ MySQL Server
-Render Lizenz € pro Monat
+- Pro Jahr 5350€ MySQL Server
 
