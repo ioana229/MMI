@@ -1,4 +1,4 @@
-# HomeView
+# HomeView "/home"
 ## Header (Navbar)
 - Nav-Icon
 - Logo
@@ -37,3 +37,5 @@
 ## Sub-Footer
 - Socials-Icons (Facebook, Twitter, Instagram) mit href zu den Konten der Socials
 - &copy 2024 Copyright Area
+
+# FeedView "/{countrCode, e.g. "de"}/feed"
