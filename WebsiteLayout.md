@@ -51,3 +51,7 @@
 ## Sidebar
 - Register Button
 - Login Button
+
+## Main
+- Kategorie Slide: Frühstück, Kaffee, Pizza, Fast Food, Burger, Sushi, Asiatisch, Desserts, Indisch, ... [Array]
+- Filter Slide: Angebote, Liefergebühr Dropdown, Unter 30 Minuten, Höchste Bewertung, Bewertung Dropdown, Preis Dropdown,  Diätvorschriften, Sortieren Dropdown
