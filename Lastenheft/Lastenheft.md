@@ -4,6 +4,7 @@ Ausganssituation: Eine große Firmenkette für gesunde Fastfood (MacAPPLE) möch
 Lastenheft für das MacAPPLE Online-Lieferservice und Funny-Dinner-Contest
 
 1. Zielbestimmung
+   
 1.1 Aufgabenstellung
 MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot erweitern und neben dem Restaurantgeschäft einen Lieferservice anbieten. Kunden sollen über die Unternehmenshomepage verschiedene Menüs und Produkte auswählen und bestellen können. Zusätzlich soll ein interaktiver "Funny-Dinner-Contest" implementiert werden, bei dem Kunden lustige Bilder hochladen und bewerten können.
 1.2 Muss-Ziele
@@ -14,6 +15,7 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
 * Datenschutz & Sicherheit: Sicherstellung der Einhaltung aller relevanten Datenschutzgesetze (z.B. DSGVO) und Schutz sensibler Daten.
 
 2. Produkteinsatz
+   
 2.1 Zielgruppe
 * Bestehende Kunden: Stammkunden, die den Komfort eines Lieferservices nutzen möchten.
 * Neukunden: Personen, die gesundes Fastfood bevorzugen und Wert auf bequeme Bestellmöglichkeiten legen.
@@ -23,6 +25,7 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
 * Markenimage: Positionierung als modernes, kundenorientiertes Unternehmen, das auf Ernährung und Digitalisierung setzt.
 
 3. Produktfunktionen
+   
 3.1 Online-Bestellsystem
 * Produktkatalog:
     * Darstellung aller verfügbaren Menüs und Produkte mit Bildern und Beschreibungen.
@@ -36,7 +39,9 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
     * Registrierung und Login-Funktion.
     * Speicherung von Lieferadressen und Bestellhistorie.
     * Möglichkeit zur Nachbestellung vorheriger Bestellungen.
+      
 3.2 Datenbankverwaltung
+
 * Produkte:
     * Verwaltung von Produktdetails, Zutatenlisten und Nährwertangaben.
 * Kunden:
@@ -72,6 +77,7 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
     * Rollenbasierte Zugriffsrechte für Admins und Mitarbeiter.
 
 4. Qualitätsanforderungen
+   
 4.1 Benutzerfreundlichkeit
 * Intuitive Navigation: Klare Menüstruktur und einfache Bedienung.
 * Responsives Design: Optimale Darstellung auf Desktop- und mobilen Endgeräten.
@@ -82,6 +88,7 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
 * Backup-Strategie: Tägliche Backups aller Datenbanken und Systeme.
 
 5. Rahmenbedingungen
+   
 5.1 Technische Vorgaben
 * Webtechnologie:
     * Frontend: HTML5, CSS3, JavaScript (Frameworks wie React oder Angular).
@@ -102,12 +109,14 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
 * Budget: ?
 
 6. Lieferumfang
+   
 * Funktionsfähige Webseite: Komplettes Online-Bestellsystem und Contest-Plattform.
 * Dokumentation:
     * Benutzerhandbuch für Kunden und Admins.
     * Technische Dokumentation für Wartung und Weiterentwicklung.
 
 7. Abnahmekriterien
+   
 * Funktionalität:
     * Alle Muss-Ziele sind vollständig umgesetzt.
     * System läuft stabil und fehlerfrei.
@@ -119,6 +128,7 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
     * System erfüllt Performance-Anforderungen bei Lasttests.
 
 8. Risiken und Annahmen
+   
 * Risiken:
     * Zeitverzögerungen durch unvorhergesehene technische Probleme.
     * Sicherheitsbedrohungen durch Cyberangriffe.
@@ -127,6 +137,7 @@ MacAPPLE, eine große Firmenkette für gesundes Fastfood, möchte ihr Angebot er
     * Kundenakzeptanz: Die Zielgruppe nimmt den Lieferservice und den Contest positiv an.
 
 9. Potenzielle Erweiterungen
+    
 * Mobile App: Entwicklung einer nativen App für iOS und Android zur Steigerung der Nutzerfreundlichkeit.
 * Personalisierte Marketingkampagnen: Nutzung der Daten aus der Kundenanalyse für gezielte Werbeaktionen.
 * Erweiterte Zahlungssysteme: Integration weiterer Zahlungsmethoden wie Apple Pay oder Google Pay.
