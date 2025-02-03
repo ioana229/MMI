@@ -13,5 +13,5 @@ CREATE TABLE IF NOT EXISTS user (
     first_name VARCHAR(50),                  --  5.  Vorname
     last_name VARCHAR(50),                   --  6.  Nachname
     phone_number VARCHAR(15),                --  7.  Telefonnummer
-    address TEXT,                            --  8.  Lieferadresse 
+    address_id INT,                          --  8.  Verweis auf die Adresse des Benutzers _ FK
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 9.  Erstellungsdatum des Accounts
