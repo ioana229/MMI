@@ -1,7 +1,9 @@
 -- Prüft, ob die Datenbank "food_db" bereits existiert
 -- Wenn sie nicht existiert, wird sie erstellt
 CREATE DATABASE IF NOT EXISTS food_db;
+USE food_db;
 
+-- Prüft, ob die Tabelle "user" bereits existiert
 -- Erstellen der Tabelle user
 CREATE TABLE IF NOT EXISTS user (
     user_id INT AUTO_INCREMENT PRIMARY KEY, --   1.  Eindeutige Benutzer-ID _ NICHT NULL
