@@ -15,3 +15,14 @@ CREATE TABLE IF NOT EXISTS user (
     phone_number VARCHAR(15),                --  7.  Telefonnummer
     address_id INT,                          --  8.  Verweis auf die Adresse des Benutzers _ FK
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 9.  Erstellungsdatum des Accounts
+
+CREATE TABLE IF NOT EXISTS address (
+    address_id INT AUTO_INCREMENT PRIMARY KEY,    -- 1. Eindeutige Adresse-ID _ NICHT NULL
+    street VARCHAR(100) NOT NULL,                 -- 2. Straße _ NICHT NULL
+    city VARCHAR(50) NOT NULL,                    -- 3. Stadt _ NICHT NULL
+    state VARCHAR(50),                            -- 4. Bundesland
+    postal_code VARCHAR(20) NOT NULL,             -- 5. Postleitzahl _ NICHT NULL
+    country VARCHAR(50) NOT NULL,                 -- 6. Land _ NICHT NULL
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 7. Erstellungsdatum der Adresse
+    FOREIGN KEY (address_id) REFERENCES user(address_id) -- 8. Verknüpfung zur Benutzer-Tabelle
+);
