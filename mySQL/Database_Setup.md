@@ -111,8 +111,8 @@ CREATE TABLE Rechnung (
 CREATE TABLE Admin (
     AdminID INT AUTO_INCREMENT PRIMARY KEY,
     Benutzername VARCHAR(50) UNIQUE NOT NULL,
-    Passwort VARCHAR(255) NOT NULL -- Annahme: Passwörter werden verschlüsselt gespeichert
-);
+    Passwort VARCHAR(255) NOT NULL 
+    ); -- Annahme: Passwörter werden verschlüsselt gespeichert
 
 -- Tabelle für Bilder (Funny-Dinner-Contest)
 CREATE TABLE Bild (
