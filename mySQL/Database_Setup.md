@@ -18,6 +18,7 @@ CREATE TABLE Kunde (
     Vorname VARCHAR(50) NOT NULL,
     Nachname VARCHAR(50) NOT NULL,
     EMail VARCHAR(100) UNIQUE NOT NULL,
+    Hash_Password VARCHAR(255) NOT NULL,
     Telefon VARCHAR(20),
     AdresseID INT,
     FOREIGN KEY (AdresseID) REFERENCES Adresse(AdresseID)
