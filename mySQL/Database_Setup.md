@@ -118,7 +118,7 @@ CREATE TABLE Admin (
 CREATE TABLE Bild (
     BildID INT AUTO_INCREMENT PRIMARY KEY,
     KundenID INT,
-    Bilddatei LONGBLOB NOT NULL,
+    Bilddatei VARCHAR(255) NOT NULL,
     Titel VARCHAR(100),
     Hochladedatum DATETIME NOT NULL,
     Freigabestatus BOOLEAN DEFAULT FALSE,
