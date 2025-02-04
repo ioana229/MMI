@@ -5,7 +5,7 @@ USE MacAPPLE_DB;
 -- Tabelle für Adressen
 CREATE TABLE Adresse (
     AdresseID INT AUTO_INCREMENT PRIMARY KEY,
-    Straße VARCHAR(100),
+    Strasse VARCHAR(100),
     Hausnummer VARCHAR(10),
     Postleitzahl VARCHAR(10),
     Stadt VARCHAR(50),
@@ -49,16 +49,16 @@ CREATE TABLE Produkt_Zutat (
 );
 
 -- Tabelle für Menüs
-CREATE TABLE Menü (
-    MenüID INT AUTO_INCREMENT PRIMARY KEY,
-    Menüname VARCHAR(100) NOT NULL,
+CREATE TABLE Menue (
+    MenueID INT AUTO_INCREMENT PRIMARY KEY,
+    Menuename VARCHAR(100) NOT NULL,
     Beschreibung TEXT,
     Preis DECIMAL(10, 2) NOT NULL
 );
 
 -- Zwischentabelle für Menü-Produkt Beziehung
-CREATE TABLE Menü_Produkt (
-    MenüID INT,
+CREATE TABLE Menue_Produkt (
+    MenueID INT,
     ProduktID INT,
     PRIMARY KEY (MenüID, ProduktID),
     FOREIGN KEY (MenüID) REFERENCES Menü(MenüID) ON DELETE CASCADE,
@@ -90,11 +90,11 @@ CREATE TABLE Bestellposten_Produkt (
 -- Tabelle für Bestellposten von Menüs
 CREATE TABLE Bestellposten_Menü (
     BestellID INT,
-    MenüID INT,
+    MenueID INT,
     Menge INT,
-    PRIMARY KEY (BestellID, MenüID),
+    PRIMARY KEY (BestellID, MenueID),
     FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID) ON DELETE CASCADE,
-    FOREIGN KEY (MenüID) REFERENCES Menü(MenüID) ON DELETE CASCADE
+    FOREIGN KEY (MenueID) REFERENCES Menue(MenueID) ON DELETE CASCADE
 );
 
 -- Tabelle für Rechnungen
