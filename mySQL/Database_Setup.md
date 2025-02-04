@@ -104,14 +104,14 @@ CREATE TABLE Rechnung (
     BestellID INT,
     Rechnungsdatum DATETIME NOT NULL,
     Betrag DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID) ON DELETE CASCADE
+    FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID)
 );
 
 -- Tabelle für Admins
 CREATE TABLE Admin (
     AdminID INT AUTO_INCREMENT PRIMARY KEY,
     Benutzername VARCHAR(50) UNIQUE NOT NULL,
-    Passwort VARCHAR(255) NOT NULL -- Annahme: Passwörter werden verschlüsselt gespeichert
+    Passwort_Hash VARCHAR(255) NOT NULL
 );
 
 -- Tabelle für Bilder (Funny-Dinner-Contest)
