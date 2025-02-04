@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2025 at 10:01 AM
+-- Generation Time: Feb 04, 2025 at 11:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,16 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `AdminID` int(11) NOT NULL,
   `Benutzername` varchar(50) NOT NULL,
-  `Passwort_Hash` varchar(255) NOT NULL
+  `Passwort_Hash` varchar(255) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`AdminID`, `Benutzername`, `Passwort_Hash`) VALUES
-(1, 'admin1', 'hashed_password_1'),
-(2, 'admin2', 'hashed_password_2');
+INSERT INTO `admin` (`AdminID`, `Benutzername`, `Passwort_Hash`, `created_on`) VALUES
+(1, 'admin1', 'hashed_password_1', '2025-02-04 09:59:08'),
+(2, 'admin2', 'hashed_password_2', '2025-02-04 09:59:08');
 
 -- --------------------------------------------------------
 
@@ -116,10 +117,10 @@ INSERT INTO `bestellposten_produkt` (`BestellID`, `ProduktID`, `Menge`) VALUES
 CREATE TABLE `bestellung` (
   `BestellID` int(11) NOT NULL,
   `KundenID` int(11) DEFAULT NULL,
-  `Bestelldatum` datetime NOT NULL,
+  `Bestelldatum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Gesamtbetrag` decimal(10,2) NOT NULL,
   `AdresseID` int(11) DEFAULT NULL,
-  `Zahlungsart` varchar(50) DEFAULT NULL
+  `Zahlungsart` enum('Credit Card','Master Card','Cash on Delivery','') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -127,9 +128,9 @@ CREATE TABLE `bestellung` (
 --
 
 INSERT INTO `bestellung` (`BestellID`, `KundenID`, `Bestelldatum`, `Gesamtbetrag`, `AdresseID`, `Zahlungsart`) VALUES
-(1, 1, '2025-02-04 12:00:00', 15.99, 1, 'Credit Card'),
-(2, 2, '2025-02-04 14:00:00', 12.99, 2, 'PayPal'),
-(3, 3, '2025-02-04 16:00:00', 19.99, 3, 'Cash');
+(1, 1, '2025-02-04 11:00:00', 15.99, 1, 'Credit Card'),
+(2, 2, '2025-02-04 10:25:11', 12.99, 2, 'Master Card'),
+(3, 3, '2025-02-04 10:25:19', 19.99, 3, 'Cash on Delivery');
 
 -- --------------------------------------------------------
 
@@ -141,8 +142,8 @@ CREATE TABLE `bewertung` (
   `BewertungsID` int(11) NOT NULL,
   `BildID` int(11) DEFAULT NULL,
   `KundenID` int(11) DEFAULT NULL,
-  `Bewertungspunkte` int(11) DEFAULT NULL CHECK (`Bewertungspunkte` between 1 and 5),
-  `Bewertungsdatum` datetime NOT NULL
+  `Bewertungspunkte` tinyint(1) NOT NULL,
+  `Bewertungsdatum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -150,8 +151,8 @@ CREATE TABLE `bewertung` (
 --
 
 INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungspunkte`, `Bewertungsdatum`) VALUES
-(1, 1, 1, 5, '2025-02-04 12:45:00'),
-(2, 2, 2, 4, '2025-02-04 14:45:00');
+(1, 1, 1, 5, '2025-02-04 11:45:00'),
+(2, 2, 2, 4, '2025-02-04 13:45:00');
 
 -- --------------------------------------------------------
 
@@ -164,8 +165,8 @@ CREATE TABLE `bild` (
   `KundenID` int(11) DEFAULT NULL,
   `Bilddatei` varchar(255) NOT NULL,
   `Titel` varchar(100) DEFAULT NULL,
-  `Hochladedatum` datetime NOT NULL,
-  `Freigabestatus` tinyint(1) DEFAULT 0,
+  `Hochladedatum` timestamp NOT NULL DEFAULT current_timestamp(),
+  `Freigabestatus` tinyint(1) NOT NULL DEFAULT 0,
   `AdminID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -174,8 +175,8 @@ CREATE TABLE `bild` (
 --
 
 INSERT INTO `bild` (`BildID`, `KundenID`, `Bilddatei`, `Titel`, `Hochladedatum`, `Freigabestatus`, `AdminID`) VALUES
-(1, 1, 'image_data_1', 'Funny Dinner 1', '2025-02-04 12:30:00', 1, 1),
-(2, 2, 'image_data_2', 'Funny Dinner 2', '2025-02-04 14:30:00', 0, 2);
+(1, 1, 'image_data_1', 'Funny Dinner 1', '2025-02-04 11:30:00', 1, 1),
+(2, 2, 'image_data_2', 'Funny Dinner 2', '2025-02-04 13:30:00', 0, 2);
 
 -- --------------------------------------------------------
 
