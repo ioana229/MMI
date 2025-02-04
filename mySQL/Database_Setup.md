@@ -89,7 +89,7 @@ CREATE TABLE Bestellposten_Produkt (
 );
 
 -- Tabelle für Bestellposten von Menüs
-CREATE TABLE Bestellposten_Menü (
+CREATE TABLE Bestellposten_Menue (
     BestellID INT,
     MenueID INT,
     Menge INT,
