@@ -1,28 +1,138 @@
--- Prüft, ob die Datenbank "food_db" bereits existiert
--- Wenn sie nicht existiert, wird sie erstellt
-CREATE DATABASE IF NOT EXISTS food_db;
-USE food_db;
+-- Erstellen einer neuen Datenbank
+CREATE DATABASE IF NOT EXISTS MacAPPLE_DB;
+USE MacAPPLE_DB;
 
--- Prüft, ob die Tabelle "user" bereits existiert
--- Erstellen der Tabelle user
-CREATE TABLE IF NOT EXISTS user (
-    user_id INT AUTO_INCREMENT UNIQUE PRIMARY KEY, --   1.  Eindeutige Benutzer-ID _ NICHT NULL
-    username VARCHAR(50) NOT NULL,           --  2.  Benutzername _ NICH NULL
-    email VARCHAR(100) UNIQUE NOT NULL,      --  3.  E-Mail-Adresse _ EINMALIG und NICHT NULL
-    password_hash VARCHAR(255) NOT NULL,     --  4.  Verschlüsseltes Passwort _ NICHT NULL
-    first_name VARCHAR(50),                  --  5.  Vorname
-    last_name VARCHAR(50),                   --  6.  Nachname
-    phone_number VARCHAR(15),                --  7.  Telefonnummer
-    address_id INT,                          --  8.  Verweis auf die Adresse des Benutzers _ FK
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 9.  Erstellungsdatum des Accounts
+-- Tabelle für Adressen
+CREATE TABLE Adresse (
+    AdresseID INT AUTO_INCREMENT PRIMARY KEY,
+    Straße VARCHAR(100),
+    Hausnummer VARCHAR(10),
+    Postleitzahl VARCHAR(10),
+    Stadt VARCHAR(50),
+    Land VARCHAR(50)
+);
 
-CREATE TABLE IF NOT EXISTS address (
-    address_id INT AUTO_INCREMENT UNIQUE PRIMARY KEY,    -- 1. Eindeutige Adresse-ID _ NICHT NULL
-    street VARCHAR(100) NOT NULL,                 -- 2. Straße _ NICHT NULL
-    city VARCHAR(50) NOT NULL,                    -- 3. Stadt _ NICHT NULL
-    state VARCHAR(50),                            -- 4. Bundesland
-    postal_code VARCHAR(20) NOT NULL,             -- 5. Postleitzahl _ NICHT NULL
-    country VARCHAR(50) NOT NULL,                 -- 6. Land _ NICHT NULL
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 7. Erstellungsdatum der Adresse
-    FOREIGN KEY (address_id) REFERENCES user(address_id) -- 8. Verknüpfung zur Benutzer-Tabelle
+-- Tabelle für Kunden
+CREATE TABLE Kunde (
+    KundenID INT AUTO_INCREMENT PRIMARY KEY,
+    Vorname VARCHAR(50) NOT NULL,
+    Nachname VARCHAR(50) NOT NULL,
+    EMail VARCHAR(100) UNIQUE NOT NULL,
+    Telefon VARCHAR(20),
+    AdresseID INT,
+    FOREIGN KEY (AdresseID) REFERENCES Adresse(AdresseID)
+);
+
+-- Tabelle für Produkte
+CREATE TABLE Produkt (
+    ProduktID INT AUTO_INCREMENT PRIMARY KEY,
+    Produktname VARCHAR(100) NOT NULL,
+    Beschreibung TEXT,
+    Preis DECIMAL(10, 2) NOT NULL,
+    Energiewert INT
+);
+
+-- Tabelle für Zutaten
+CREATE TABLE Zutat (
+    ZutatID INT AUTO_INCREMENT PRIMARY KEY,
+    Zutatenname VARCHAR(100) NOT NULL,
+    Beschreibung TEXT
+);
+
+-- Zwischentabelle für Produkt-Zutat Beziehung
+CREATE TABLE Produkt_Zutat (
+    ProduktID INT,
+    ZutatID INT,
+    PRIMARY KEY (ProduktID, ZutatID),
+    FOREIGN KEY (ProduktID) REFERENCES Produkt(ProduktID) ON DELETE CASCADE,
+    FOREIGN KEY (ZutatID) REFERENCES Zutat(ZutatID) ON DELETE CASCADE
+);
+
+-- Tabelle für Menüs
+CREATE TABLE Menü (
+    MenüID INT AUTO_INCREMENT PRIMARY KEY,
+    Menüname VARCHAR(100) NOT NULL,
+    Beschreibung TEXT,
+    Preis DECIMAL(10, 2) NOT NULL
+);
+
+-- Zwischentabelle für Menü-Produkt Beziehung
+CREATE TABLE Menü_Produkt (
+    MenüID INT,
+    ProduktID INT,
+    PRIMARY KEY (MenüID, ProduktID),
+    FOREIGN KEY (MenüID) REFERENCES Menü(MenüID) ON DELETE CASCADE,
+    FOREIGN KEY (ProduktID) REFERENCES Produkt(ProduktID) ON DELETE CASCADE
+);
+
+-- Tabelle für Bestellungen
+CREATE TABLE Bestellung (
+    BestellID INT AUTO_INCREMENT PRIMARY KEY,
+    KundenID INT,
+    Bestelldatum DATETIME NOT NULL,
+    Gesamtbetrag DECIMAL(10, 2) NOT NULL,
+    LieferadresseID INT,
+    Zahlungsart VARCHAR(50),
+    FOREIGN KEY (KundenID) REFERENCES Kunde(KundenID),
+    FOREIGN KEY (LieferadresseID) REFERENCES Adresse(AdresseID)
+);
+
+-- Tabelle für Bestellposten von Produkten
+CREATE TABLE Bestellposten_Produkt (
+    BestellID INT,
+    ProduktID INT,
+    Menge INT,
+    PRIMARY KEY (BestellID, ProduktID),
+    FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID) ON DELETE CASCADE,
+    FOREIGN KEY (ProduktID) REFERENCES Produkt(ProduktID) ON DELETE CASCADE
+);
+
+-- Tabelle für Bestellposten von Menüs
+CREATE TABLE Bestellposten_Menü (
+    BestellID INT,
+    MenüID INT,
+    Menge INT,
+    PRIMARY KEY (BestellID, MenüID),
+    FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID) ON DELETE CASCADE,
+    FOREIGN KEY (MenüID) REFERENCES Menü(MenüID) ON DELETE CASCADE
+);
+
+-- Tabelle für Rechnungen
+CREATE TABLE Rechnung (
+    RechnungsID INT AUTO_INCREMENT PRIMARY KEY,
+    BestellID INT,
+    Rechnungsdatum DATETIME NOT NULL,
+    Betrag DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (BestellID) REFERENCES Bestellung(BestellID) ON DELETE CASCADE
+);
+
+-- Tabelle für Admins
+CREATE TABLE Admin (
+    AdminID INT AUTO_INCREMENT PRIMARY KEY,
+    Benutzername VARCHAR(50) UNIQUE NOT NULL,
+    Passwort VARCHAR(255) NOT NULL -- Annahme: Passwörter werden verschlüsselt gespeichert
+);
+
+-- Tabelle für Bilder (Funny-Dinner-Contest)
+CREATE TABLE Bild (
+    BildID INT AUTO_INCREMENT PRIMARY KEY,
+    KundenID INT,
+    Bilddatei LONGBLOB NOT NULL,
+    Titel VARCHAR(100),
+    Hochladedatum DATETIME NOT NULL,
+    Freigabestatus BOOLEAN DEFAULT FALSE,
+    AdminID INT,
+    FOREIGN KEY (KundenID) REFERENCES Kunde(KundenID) ON DELETE CASCADE,
+    FOREIGN KEY (AdminID) REFERENCES Admin(AdminID) ON DELETE SET NULL
+);
+
+-- Tabelle für Bewertungen (Funny-Dinner-Contest)
+CREATE TABLE Bewertung (
+    BewertungsID INT AUTO_INCREMENT PRIMARY KEY,
+    BildID INT,
+    KundenID INT,
+    Bewertungspunkte INT CHECK (Bewertungspunkte BETWEEN 1 AND 5),
+    Bewertungsdatum DATETIME NOT NULL,
+    FOREIGN KEY (BildID) REFERENCES Bild(BildID) ON DELETE CASCADE,
+    FOREIGN KEY (KundenID) REFERENCES Kunde(KundenID) ON DELETE CASCADE
 );
