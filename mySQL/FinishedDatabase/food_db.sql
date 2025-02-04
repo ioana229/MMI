@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2025 at 11:38 AM
+-- Generation Time: Feb 04, 2025 at 12:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`AdminID`, `Benutzername`, `Passwort_Hash`, `created_on`) VALUES
 (1, 'admin1', 'hashed_password_1', '2025-02-04 09:59:08'),
-(2, 'admin2', 'hashed_password_2', '2025-02-04 09:59:08');
+(2, 'admin2', 'hashed_password_2', '2025-02-04 09:59:08'),
+(3, 'admin_user', 'new_hashed_password_123', '2025-02-04 10:52:11');
 
 -- --------------------------------------------------------
 
@@ -62,7 +63,7 @@ CREATE TABLE `adresse` (
 --
 
 INSERT INTO `adresse` (`AdresseID`, `Strasse`, `Hausnummer`, `Postleitzahl`, `Stadt`, `Land`) VALUES
-(1, 'Main Street', '123', '10115', 'Berlin', 'Germany'),
+(1, 'Main Street jjjj', '123', '10115', 'Munich', 'Germany'),
 (2, 'Oak Road', '456', '10234', 'Munich', 'Germany'),
 (3, 'Elm Street', '789', '10345', 'Hamburg', 'Germany');
 
@@ -84,8 +85,7 @@ CREATE TABLE `bestellposten_menue` (
 
 INSERT INTO `bestellposten_menue` (`BestellID`, `MenueID`, `Menge`) VALUES
 (1, 1, 1),
-(2, 2, 1),
-(3, 3, 1);
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -105,8 +105,7 @@ CREATE TABLE `bestellposten_produkt` (
 
 INSERT INTO `bestellposten_produkt` (`BestellID`, `ProduktID`, `Menge`) VALUES
 (1, 1, 1),
-(2, 2, 1),
-(3, 3, 2);
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -119,7 +118,6 @@ CREATE TABLE `bestellung` (
   `KundenID` int(11) DEFAULT NULL,
   `Bestelldatum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Gesamtbetrag` decimal(10,2) NOT NULL,
-  `AdresseID` int(11) DEFAULT NULL,
   `Zahlungsart` enum('Credit Card','Master Card','Cash on Delivery','') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -127,10 +125,12 @@ CREATE TABLE `bestellung` (
 -- Dumping data for table `bestellung`
 --
 
-INSERT INTO `bestellung` (`BestellID`, `KundenID`, `Bestelldatum`, `Gesamtbetrag`, `AdresseID`, `Zahlungsart`) VALUES
-(1, 1, '2025-02-04 11:00:00', 15.99, 1, 'Credit Card'),
-(2, 2, '2025-02-04 10:25:11', 12.99, 2, 'Master Card'),
-(3, 3, '2025-02-04 10:25:19', 19.99, 3, 'Cash on Delivery');
+INSERT INTO `bestellung` (`BestellID`, `KundenID`, `Bestelldatum`, `Gesamtbetrag`, `Zahlungsart`) VALUES
+(1, 1, '2025-02-04 11:15:07', 120.00, 'Credit Card'),
+(2, 2, '2025-02-04 10:25:11', 12.99, 'Master Card'),
+(4, 1, '2025-02-04 11:15:07', 99.99, 'Credit Card'),
+(5, 2, '2025-02-04 11:15:07', 150.50, 'Master Card'),
+(6, 3, '2025-02-04 11:15:07', 200.75, 'Cash on Delivery');
 
 -- --------------------------------------------------------
 
@@ -151,8 +151,9 @@ CREATE TABLE `bewertung` (
 --
 
 INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungspunkte`, `Bewertungsdatum`) VALUES
-(1, 1, 1, 5, '2025-02-04 11:45:00'),
-(2, 2, 2, 4, '2025-02-04 13:45:00');
+(2, 2, 2, 5, '2025-02-04 11:33:13'),
+(6, 1, 1, 5, '2025-02-04 11:33:13'),
+(7, 2, 2, 4, '2025-02-04 11:33:13');
 
 -- --------------------------------------------------------
 
@@ -309,8 +310,7 @@ CREATE TABLE `rechnung` (
 
 INSERT INTO `rechnung` (`RechnungsID`, `BestellID`, `Rechnungsdatum`, `Betrag`) VALUES
 (1, 1, '2025-02-04 12:05:00', 15.99),
-(2, 2, '2025-02-04 14:05:00', 12.99),
-(3, 3, '2025-02-04 16:05:00', 19.99);
+(2, 2, '2025-02-04 14:05:00', 12.99);
 
 -- --------------------------------------------------------
 
@@ -369,8 +369,7 @@ ALTER TABLE `bestellposten_produkt`
 --
 ALTER TABLE `bestellung`
   ADD PRIMARY KEY (`BestellID`),
-  ADD KEY `KundenID` (`KundenID`),
-  ADD KEY `LieferadresseID` (`AdresseID`);
+  ADD KEY `KundenID` (`KundenID`);
 
 --
 -- Indexes for table `bewertung`
@@ -443,25 +442,25 @@ ALTER TABLE `zutat`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `AdresseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `AdresseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `bestellung`
 --
 ALTER TABLE `bestellung`
-  MODIFY `BestellID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `BestellID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `bewertung`
 --
 ALTER TABLE `bewertung`
-  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `bild`
@@ -521,8 +520,7 @@ ALTER TABLE `bestellposten_produkt`
 -- Constraints for table `bestellung`
 --
 ALTER TABLE `bestellung`
-  ADD CONSTRAINT `bestellung_ibfk_1` FOREIGN KEY (`KundenID`) REFERENCES `kunde` (`KundenID`),
-  ADD CONSTRAINT `bestellung_ibfk_2` FOREIGN KEY (`AdresseID`) REFERENCES `adresse` (`AdresseID`);
+  ADD CONSTRAINT `bestellung_ibfk_1` FOREIGN KEY (`KundenID`) REFERENCES `kunde` (`KundenID`);
 
 --
 -- Constraints for table `bewertung`
