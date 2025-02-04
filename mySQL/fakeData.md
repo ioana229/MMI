@@ -118,8 +118,8 @@ INSERT INTO Rechnung (BestellID, Rechnungsdatum, Betrag) VALUES
 # Hinzufügen von Bildern in die Tabelle Bild
 ## Hinweis: Die Bilddatei wird hier als Platzhalter NULL gesetzt, da die tatsächlichen Bilddaten komplex wären
 INSERT INTO Bild (KundenID, Bilddatei, Titel, Hochladedatum, Freigabestatus, AdminID) VALUES
-(1, NULL, 'Burger Spaß', '2023-10-01 12:10:00', TRUE, 1),
-(2, NULL, 'Pommes Kunst', '2023-10-02 13:40:00', FALSE, NULL);
+(1, 'not-null-value', 'Burger Spaß', '2023-10-01 12:10:00', TRUE, 1),
+(2, 'not-null-value', 'Pommes Kunst', '2023-10-02 13:40:00', FALSE, NULL);
 
 # Einfügen von Daten in die Tabelle Bewertung
 INSERT INTO Bewertung (BildID, KundenID, Bewertungspunkte, Bewertungsdatum) VALUES
