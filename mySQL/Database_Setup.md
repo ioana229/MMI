@@ -61,8 +61,8 @@ CREATE TABLE Menue (
 CREATE TABLE Menue_Produkt (
     MenueID INT,
     ProduktID INT,
-    PRIMARY KEY (MenüID, ProduktID),
-    FOREIGN KEY (MenüID) REFERENCES Menü(MenüID) ON DELETE CASCADE,
+    PRIMARY KEY (MenueID, ProduktID),
+    FOREIGN KEY (MenueID) REFERENCES Menue(MenueID) ON DELETE CASCADE,
     FOREIGN KEY (ProduktID) REFERENCES Produkt(ProduktID) ON DELETE CASCADE
 );
 
