@@ -40,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registrieren</title>
 </head>
 <body>
-    <h2>Register</h2>
+    <h2>Registrieren</h2>
     <form action="register.php" method="post">
         <label for="vorname">Vorname:</label>
         <input type="text" id="vorname" name="Vorname" required><br><br>
@@ -61,7 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="password">Passwort:</label>
         <input type="password" id="password" name="Password_Hash" required><br><br>
         
-        <input type="submit" value="Register">
+        <label for="agb">Ich stimme den <a href="agb.html" target="_blank">AGB</a> zu:</label>
+        <input type="checkbox" id="agb" name="AGB" required><br><br>
+        
+        <input type="submit" value="Registrieren">
     </form>
 </body>
 </html>
