@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2025 at 12:45 PM
+-- Generation Time: Feb 05, 2025 at 09:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `food_db`
+-- Database: `food_db_test`
 --
 
 -- --------------------------------------------------------
@@ -214,17 +214,19 @@ CREATE TABLE `menue` (
   `MenueID` int(11) NOT NULL,
   `Menuename` varchar(100) NOT NULL,
   `Beschreibung` text DEFAULT NULL,
-  `Preis` decimal(10,2) NOT NULL
+  `DiscountPreis` decimal(10,2) NOT NULL,
+  `NormalPreis` decimal(10,2) NOT NULL,
+  `BildURL` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `menue`
 --
 
-INSERT INTO `menue` (`MenueID`, `Menuename`, `Beschreibung`, `Preis`) VALUES
-(1, 'Dinner Set 1', 'Includes Pizza Margherita and a drink', 12.99),
-(2, 'Dinner Set 2', 'Includes Burger and fries', 10.99),
-(3, 'Dinner Set 3', 'Includes Pasta Bolognese and salad', 11.99);
+INSERT INTO `menue` (`MenueID`, `Menuename`, `Beschreibung`, `DiscountPreis`, `NormalPreis`, `BildURL`) VALUES
+(1, 'Dinner Set 1', 'Includes Pizza Margherita and a drink', 12.99, 0.00, ''),
+(2, 'Dinner Set 2', 'Includes Burger and fries', 10.99, 0.00, ''),
+(3, 'Dinner Set 3', 'Includes Pasta Bolognese and salad', 11.99, 0.00, '');
 
 -- --------------------------------------------------------
 
@@ -257,17 +259,18 @@ CREATE TABLE `produkt` (
   `Produktname` varchar(100) NOT NULL,
   `Beschreibung` text DEFAULT NULL,
   `Preis` decimal(10,2) NOT NULL,
-  `Energiewert` int(11) DEFAULT NULL
+  `Energiewert` int(11) DEFAULT NULL,
+  `BildURL` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `produkt`
 --
 
-INSERT INTO `produkt` (`ProduktID`, `Produktname`, `Beschreibung`, `Preis`, `Energiewert`) VALUES
-(1, 'Pizza Margherita', 'Classic pizza with tomato, mozzarella, and basil', 8.99, 200),
-(2, 'Burger', 'Juicy beef burger with lettuce and cheese', 5.99, 400),
-(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350);
+INSERT INTO `produkt` (`ProduktID`, `Produktname`, `Beschreibung`, `Preis`, `Energiewert`, `BildURL`) VALUES
+(1, 'Pizza Margherita', 'Classic pizza with tomato, mozzarella, and basil', 8.99, 200, ''),
+(2, 'Burger', 'Juicy beef burger with lettuce and cheese', 5.99, 400, ''),
+(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350, '');
 
 -- --------------------------------------------------------
 
