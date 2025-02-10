@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2025 at 09:11 AM
+-- Generation Time: Feb 10, 2025 at 10:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`AdminID`, `Benutzername`, `Passwort_Hash`, `created_on`) VALUES
 (1, 'admin1', 'hashed_password_1', '2025-02-04 09:59:08'),
 (2, 'admin2', 'hashed_password_2', '2025-02-04 09:59:08'),
-(3, 'admin_user', 'new_hashed_password_123', '2025-02-04 10:52:11');
+(3, 'admin_user', 'new_hashed_password_123', '2025-02-04 10:52:11'),
+(5, 'admin', '$2y$10$3/NjTSdKB7b4iupp/8LMl.Ls81HWhvmXq55figV4m70pnnSt5ses6', '2025-02-07 11:16:24');
 
 -- --------------------------------------------------------
 
@@ -116,21 +117,22 @@ INSERT INTO `bestellposten_produkt` (`BestellID`, `ProduktID`, `Menge`) VALUES
 CREATE TABLE `bestellung` (
   `BestellID` int(11) NOT NULL,
   `KundenID` int(11) DEFAULT NULL,
-  `Bestelldatum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `Bestelldatum` timestamp NOT NULL DEFAULT current_timestamp(),
   `Gesamtbetrag` decimal(10,2) NOT NULL,
-  `Zahlungsart` enum('Credit Card','Master Card','Cash on Delivery','') DEFAULT NULL
+  `Zahlungsart` enum('Credit Card','Master Card','Cash on Delivery','') DEFAULT NULL,
+  `Status` enum('Bestellt','In Zubereitung','Abgeschlossen','Stoniert') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bestellung`
 --
 
-INSERT INTO `bestellung` (`BestellID`, `KundenID`, `Bestelldatum`, `Gesamtbetrag`, `Zahlungsart`) VALUES
-(1, 1, '2025-02-04 11:15:07', 120.00, 'Credit Card'),
-(2, 2, '2025-02-04 10:25:11', 12.99, 'Master Card'),
-(4, 1, '2025-02-04 11:15:07', 99.99, 'Credit Card'),
-(5, 2, '2025-02-04 11:15:07', 150.50, 'Master Card'),
-(6, 3, '2025-02-04 11:15:07', 200.75, 'Cash on Delivery');
+INSERT INTO `bestellung` (`BestellID`, `KundenID`, `Bestelldatum`, `Gesamtbetrag`, `Zahlungsart`, `Status`) VALUES
+(1, 1, '2025-02-10 08:49:47', 120.00, 'Credit Card', 'Abgeschlossen'),
+(2, 2, '2025-02-10 08:55:02', 12.99, 'Master Card', 'Bestellt'),
+(4, 1, '2025-02-10 08:52:25', 99.99, 'Credit Card', 'Bestellt'),
+(5, 2, '2025-02-04 11:15:07', 150.50, 'Master Card', 'In Zubereitung'),
+(6, 3, '2025-02-04 11:15:07', 200.75, 'Cash on Delivery', 'In Zubereitung');
 
 -- --------------------------------------------------------
 
@@ -153,7 +155,11 @@ CREATE TABLE `bewertung` (
 INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungspunkte`, `Bewertungsdatum`) VALUES
 (2, 2, 2, 5, '2025-02-04 11:33:13'),
 (6, 1, 1, 5, '2025-02-04 11:33:13'),
-(7, 2, 2, 4, '2025-02-04 11:33:13');
+(7, 2, 2, 4, '2025-02-04 11:33:13'),
+(8, 1, 1, 3, '2025-02-06 10:36:43'),
+(9, 1, NULL, 3, '2025-02-06 11:06:23'),
+(10, 1, NULL, 3, '2025-02-06 11:10:12'),
+(11, 1, NULL, 2, '2025-02-10 07:23:11');
 
 -- --------------------------------------------------------
 
@@ -177,7 +183,13 @@ CREATE TABLE `bild` (
 
 INSERT INTO `bild` (`BildID`, `KundenID`, `Bilddatei`, `Titel`, `Hochladedatum`, `Freigabestatus`, `AdminID`) VALUES
 (1, 1, 'image_data_1', 'Funny Dinner 1', '2025-02-04 11:30:00', 1, 1),
-(2, 2, 'image_data_2', 'Funny Dinner 2', '2025-02-04 13:30:00', 0, 2);
+(2, 2, 'image_data_2', 'Funny Dinner 2', '2025-02-04 13:30:00', 1, 5),
+(3, 11, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 10:42:07', 1, 5),
+(4, 15, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 10:42:10', 1, 5),
+(5, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 10:59:44', 0, NULL),
+(6, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 11:00:24', 0, NULL),
+(7, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 11:00:27', 0, NULL),
+(8, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'ioanan', '2025-02-06 11:12:56', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -202,7 +214,16 @@ CREATE TABLE `kunde` (
 INSERT INTO `kunde` (`KundenID`, `Vorname`, `Nachname`, `EMail`, `Password_Hash`, `Telefon`, `AdresseID`) VALUES
 (1, 'Max', 'Mustermann', 'max@example.com', 'hashed_password_1', '1234567890', 1),
 (2, 'Anna', 'Müller', 'anna@example.com', 'hashed_password_2', '0987654321', 2),
-(3, 'John', 'Doe', 'john@example.com', 'hashed_password_3', '1122334455', 3);
+(3, 'John', 'Doe', 'john@example.com', 'hashed_password_3', '1122334455', 3),
+(7, 'test', 'test', 'test@test.test', '$2y$10$bYnyBe3TUyXmTFeMzVcc2.Atf/ZssudsE89edY3MBYF8CKAiDT7O6', NULL, NULL),
+(8, 'test', 'test', 'test1@test.test', '$2y$10$tUjHc7dNIl4gENSUtFwIeOLqMAAxxKNU.PMXdzEaC3.mNHYElxXv2', NULL, NULL),
+(9, 'test', 'test', 'test2@test.test', '$2y$10$LUgbcy5UtijAWmbMJSI7Ye4oIIACWwadw9x0FkjfQudo5y/vCQsHK', NULL, NULL),
+(10, 'ere', 'wrwr', 'tester2@test.test', '$2y$10$bkvXjYA7OnTnyH.fAY8.Le7s7GX3db60BqjGkKnq5XbA74jKx/Xmi', NULL, NULL),
+(11, 'test', 'test', 'testwer2@test.test', '$2y$10$ME/ExqbsSv6N95eOYeoPWOWchjdAQTdPLc8HBFfiS0fNYO8v6G42q', NULL, NULL),
+(12, 'test', 'test', 'tq234est2@test.test', '$2y$10$DG6s8RzGRNqHNAxjoZsmKO9o.Op/KMDqlhcQZzROQD2h/ogkPBVOy', NULL, NULL),
+(13, 'test', 'test', 'tq2343rest2@test.test', '$2y$10$Qe5H/WKecR986jJusLv8UeRL8p.bEy.cxcfEJXMcmBDlfNKhfRdFi', NULL, NULL),
+(14, 'wfkjegjk', 'kgniegn', 'qwsdfse@zsdfsfz.de', '$2y$10$AmtLOC9Pwy45ecarFy67/.8eWqcYhWl.k6jIDGjEc1MNTG1J77tdO', NULL, NULL),
+(15, 'user', 'user', 'user@user.user', '$2y$10$/.y2KwEe.enPGXM9SHtKIuIFy3TEvuQ8j5qATtUyFRc9aCGH7hWpa', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -270,7 +291,7 @@ CREATE TABLE `produkt` (
 INSERT INTO `produkt` (`ProduktID`, `Produktname`, `Beschreibung`, `Preis`, `Energiewert`, `BildURL`) VALUES
 (1, 'Pizza Margherita', 'Classic pizza with tomato, mozzarella, and basil', 8.99, 200, ''),
 (2, 'Burger', 'Juicy beef burger with lettuce and cheese', 5.99, 400, ''),
-(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350, '');
+(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/pommes.webp');
 
 -- --------------------------------------------------------
 
@@ -334,7 +355,9 @@ CREATE TABLE `zutat` (
 INSERT INTO `zutat` (`ZutatID`, `Zutatenname`, `Beschreibung`) VALUES
 (1, 'Tomato', 'Fresh red tomato'),
 (2, 'Cheese', 'Mozzarella cheese'),
-(3, 'Beef', 'Premium beef patty');
+(3, 'Beef', 'Premium beef patty'),
+(4, 'reis', 'reis'),
+(5, '123', '123');
 
 --
 -- Indexes for dumped tables
@@ -445,7 +468,7 @@ ALTER TABLE `zutat`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `adresse`
@@ -463,19 +486,19 @@ ALTER TABLE `bestellung`
 -- AUTO_INCREMENT for table `bewertung`
 --
 ALTER TABLE `bewertung`
-  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `bild`
 --
 ALTER TABLE `bild`
-  MODIFY `BildID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `BildID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `kunde`
 --
 ALTER TABLE `kunde`
-  MODIFY `KundenID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `KundenID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `menue`
@@ -487,7 +510,7 @@ ALTER TABLE `menue`
 -- AUTO_INCREMENT for table `produkt`
 --
 ALTER TABLE `produkt`
-  MODIFY `ProduktID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ProduktID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `rechnung`
@@ -499,7 +522,7 @@ ALTER TABLE `rechnung`
 -- AUTO_INCREMENT for table `zutat`
 --
 ALTER TABLE `zutat`
-  MODIFY `ZutatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ZutatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
