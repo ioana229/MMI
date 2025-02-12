@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2025 at 10:00 AM
+-- Generation Time: Feb 12, 2025 at 09:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -85,7 +85,6 @@ CREATE TABLE `bestellposten_menue` (
 --
 
 INSERT INTO `bestellposten_menue` (`BestellID`, `MenueID`, `Menge`) VALUES
-(1, 1, 1),
 (2, 2, 1);
 
 -- --------------------------------------------------------
@@ -129,9 +128,9 @@ CREATE TABLE `bestellung` (
 
 INSERT INTO `bestellung` (`BestellID`, `KundenID`, `Bestelldatum`, `Gesamtbetrag`, `Zahlungsart`, `Status`) VALUES
 (1, 1, '2025-02-10 08:49:47', 120.00, 'Credit Card', 'Abgeschlossen'),
-(2, 2, '2025-02-10 08:55:02', 12.99, 'Master Card', 'Bestellt'),
+(2, 2, '2025-02-10 08:55:02', 12.99, 'Master Card', 'In Zubereitung'),
 (4, 1, '2025-02-10 08:52:25', 99.99, 'Credit Card', 'Bestellt'),
-(5, 2, '2025-02-04 11:15:07', 150.50, 'Master Card', 'In Zubereitung'),
+(5, 2, '2025-02-04 11:15:07', 150.50, 'Master Card', 'Abgeschlossen'),
 (6, 3, '2025-02-04 11:15:07', 200.75, 'Cash on Delivery', 'In Zubereitung');
 
 -- --------------------------------------------------------
@@ -144,7 +143,6 @@ CREATE TABLE `bewertung` (
   `BewertungsID` int(11) NOT NULL,
   `BildID` int(11) DEFAULT NULL,
   `KundenID` int(11) DEFAULT NULL,
-  `Bewertungspunkte` tinyint(1) NOT NULL,
   `Bewertungsdatum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -152,14 +150,10 @@ CREATE TABLE `bewertung` (
 -- Dumping data for table `bewertung`
 --
 
-INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungspunkte`, `Bewertungsdatum`) VALUES
-(2, 2, 2, 5, '2025-02-04 11:33:13'),
-(6, 1, 1, 5, '2025-02-04 11:33:13'),
-(7, 2, 2, 4, '2025-02-04 11:33:13'),
-(8, 1, 1, 3, '2025-02-06 10:36:43'),
-(9, 1, NULL, 3, '2025-02-06 11:06:23'),
-(10, 1, NULL, 3, '2025-02-06 11:10:12'),
-(11, 1, NULL, 2, '2025-02-10 07:23:11');
+INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungsdatum`) VALUES
+(2, 2, 2, '2025-02-04 11:33:13'),
+(6, 1, 1, '2025-02-04 11:33:13'),
+(7, 2, 2, '2025-02-04 11:33:13');
 
 -- --------------------------------------------------------
 
@@ -245,9 +239,8 @@ CREATE TABLE `menue` (
 --
 
 INSERT INTO `menue` (`MenueID`, `Menuename`, `Beschreibung`, `DiscountPreis`, `NormalPreis`, `BildURL`) VALUES
-(1, 'Dinner Set 1', 'Includes Pizza Margherita and a drink', 12.99, 0.00, ''),
-(2, 'Dinner Set 2', 'Includes Burger and fries', 10.99, 0.00, ''),
-(3, 'Dinner Set 3', 'Includes Pasta Bolognese and salad', 11.99, 0.00, '');
+(2, 'Dinner Set 2', 'Includes Burger and fries', 13.49, 14.98, ''),
+(3, 'Dinner Set 3', 'Includes Pasta Bolognese and salad', 29.79, 34.95, '');
 
 -- --------------------------------------------------------
 
@@ -257,17 +250,20 @@ INSERT INTO `menue` (`MenueID`, `Menuename`, `Beschreibung`, `DiscountPreis`, `N
 
 CREATE TABLE `menue_produkt` (
   `MenueID` int(11) NOT NULL,
-  `ProduktID` int(11) NOT NULL
+  `ProduktID` int(11) NOT NULL,
+  `Menge` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `menue_produkt`
 --
 
-INSERT INTO `menue_produkt` (`MenueID`, `ProduktID`) VALUES
-(1, 1),
-(2, 2),
-(3, 3);
+INSERT INTO `menue_produkt` (`MenueID`, `ProduktID`, `Menge`) VALUES
+(2, 1, 1),
+(2, 2, 1),
+(3, 1, 1),
+(3, 2, 3),
+(3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -291,7 +287,9 @@ CREATE TABLE `produkt` (
 INSERT INTO `produkt` (`ProduktID`, `Produktname`, `Beschreibung`, `Preis`, `Energiewert`, `BildURL`) VALUES
 (1, 'Pizza Margherita', 'Classic pizza with tomato, mozzarella, and basil', 8.99, 200, ''),
 (2, 'Burger', 'Juicy beef burger with lettuce and cheese', 5.99, 400, ''),
-(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/pommes.webp');
+(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/pommes.webp'),
+(6, 'test', '123', 10.00, 10, '11'),
+(7, 'appling', 'sgsf', 15.00, 200, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/pommes.webp');
 
 -- --------------------------------------------------------
 
@@ -311,7 +309,8 @@ CREATE TABLE `produkt_zutat` (
 INSERT INTO `produkt_zutat` (`ProduktID`, `ZutatID`) VALUES
 (1, 1),
 (1, 2),
-(2, 2),
+(1, 5),
+(2, 1),
 (2, 3),
 (3, 1);
 
@@ -486,7 +485,7 @@ ALTER TABLE `bestellung`
 -- AUTO_INCREMENT for table `bewertung`
 --
 ALTER TABLE `bewertung`
-  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `bild`
@@ -504,13 +503,13 @@ ALTER TABLE `kunde`
 -- AUTO_INCREMENT for table `menue`
 --
 ALTER TABLE `menue`
-  MODIFY `MenueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `MenueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `produkt`
 --
 ALTER TABLE `produkt`
-  MODIFY `ProduktID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ProduktID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `rechnung`
