@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2025 at 09:50 AM
+-- Generation Time: Feb 14, 2025 at 11:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -55,18 +55,20 @@ CREATE TABLE `adresse` (
   `Strasse` varchar(100) DEFAULT NULL,
   `Hausnummer` varchar(10) DEFAULT NULL,
   `Postleitzahl` varchar(10) DEFAULT NULL,
-  `Stadt` varchar(50) DEFAULT NULL,
-  `Land` varchar(50) DEFAULT NULL
+  `Stadt` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `adresse`
 --
 
-INSERT INTO `adresse` (`AdresseID`, `Strasse`, `Hausnummer`, `Postleitzahl`, `Stadt`, `Land`) VALUES
-(1, 'Main Street jjjj', '123', '10115', 'Munich', 'Germany'),
-(2, 'Oak Road', '456', '10234', 'Munich', 'Germany'),
-(3, 'Elm Street', '789', '10345', 'Hamburg', 'Germany');
+INSERT INTO `adresse` (`AdresseID`, `Strasse`, `Hausnummer`, `Postleitzahl`, `Stadt`) VALUES
+(1, 'Main Street jjjj', '123', '10115', 'Munich'),
+(2, 'Oak Road', '456', '10234', 'Munich'),
+(3, 'hshshshshs', '111', '90517', 'fuerth'),
+(9, 'test', '1', '90517', 'fuerth'),
+(10, 'hshshshshs', '111', '90517', 'fuerth'),
+(11, 'afaf', '1', '9093', 'fdwd');
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,16 @@ CREATE TABLE `bestellposten_menue` (
 --
 
 INSERT INTO `bestellposten_menue` (`BestellID`, `MenueID`, `Menge`) VALUES
-(2, 2, 1);
+(2, 2, 1),
+(19, 2, 1),
+(20, 2, 2),
+(21, 3, 1),
+(22, 3, 1),
+(23, 3, 1),
+(24, 3, 1),
+(25, 3, 1),
+(26, 3, 1),
+(33, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +116,15 @@ CREATE TABLE `bestellposten_produkt` (
 
 INSERT INTO `bestellposten_produkt` (`BestellID`, `ProduktID`, `Menge`) VALUES
 (1, 1, 1),
-(2, 2, 1);
+(2, 2, 1),
+(17, 3, 1),
+(21, 2, 1),
+(21, 3, 1),
+(28, 2, 1),
+(28, 3, 1),
+(31, 3, 1),
+(32, 3, 1),
+(33, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -117,8 +136,8 @@ CREATE TABLE `bestellung` (
   `BestellID` int(11) NOT NULL,
   `KundenID` int(11) DEFAULT NULL,
   `Bestelldatum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `Gesamtbetrag` decimal(10,2) NOT NULL,
-  `Zahlungsart` enum('Credit Card','Master Card','Cash on Delivery','') DEFAULT NULL,
+  `Gesamtbetrag` decimal(10,2) DEFAULT NULL,
+  `Zahlungsart` enum('Credit Card','Master Card','Barzahlung') DEFAULT NULL,
   `Status` enum('Bestellt','In Zubereitung','Abgeschlossen','Stoniert') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,9 +148,36 @@ CREATE TABLE `bestellung` (
 INSERT INTO `bestellung` (`BestellID`, `KundenID`, `Bestelldatum`, `Gesamtbetrag`, `Zahlungsart`, `Status`) VALUES
 (1, 1, '2025-02-10 08:49:47', 120.00, 'Credit Card', 'Abgeschlossen'),
 (2, 2, '2025-02-10 08:55:02', 12.99, 'Master Card', 'In Zubereitung'),
-(4, 1, '2025-02-10 08:52:25', 99.99, 'Credit Card', 'Bestellt'),
-(5, 2, '2025-02-04 11:15:07', 150.50, 'Master Card', 'Abgeschlossen'),
-(6, 3, '2025-02-04 11:15:07', 200.75, 'Cash on Delivery', 'In Zubereitung');
+(4, 1, '2025-02-10 08:52:25', 99.99, 'Credit Card', 'Abgeschlossen'),
+(5, 2, '2025-02-04 11:15:07', 150.50, 'Barzahlung', 'Abgeschlossen'),
+(6, 3, '2025-02-04 11:15:07', 200.75, '', 'In Zubereitung'),
+(7, 15, '2025-02-13 09:48:24', NULL, 'Credit Card', 'Bestellt'),
+(8, 15, '2025-02-13 09:52:35', 29.79, 'Credit Card', 'Bestellt'),
+(9, 15, '2025-02-13 09:54:14', 19.48, 'Barzahlung', 'Bestellt'),
+(10, 15, '2025-02-13 09:55:33', 29.79, 'Credit Card', 'Bestellt'),
+(11, 15, '2025-02-13 09:57:31', 29.79, 'Credit Card', 'Bestellt'),
+(12, 15, '2025-02-13 09:58:19', 29.79, 'Credit Card', 'Bestellt'),
+(13, 15, '2025-02-13 09:59:10', 29.79, 'Credit Card', 'Bestellt'),
+(14, 15, '2025-02-13 10:01:04', 29.79, 'Credit Card', 'Bestellt'),
+(15, 15, '2025-02-13 10:30:24', 5.99, 'Credit Card', 'Bestellt'),
+(16, 15, '2025-02-13 10:30:46', 14.98, 'Credit Card', 'Bestellt'),
+(17, 15, '2025-02-13 10:31:43', 7.99, 'Credit Card', 'Bestellt'),
+(18, 15, '2025-02-13 10:32:34', 13.49, 'Credit Card', 'Bestellt'),
+(19, 15, '2025-02-13 10:33:46', 13.49, 'Credit Card', 'Bestellt'),
+(20, 15, '2025-02-13 10:34:13', 26.98, 'Credit Card', 'Bestellt'),
+(21, 15, '2025-02-13 10:34:44', 43.77, 'Credit Card', 'Bestellt'),
+(22, 15, '2025-02-13 10:49:17', 29.79, 'Credit Card', 'Bestellt'),
+(23, 15, '2025-02-13 10:51:15', 29.79, 'Credit Card', 'Bestellt'),
+(24, 15, '2025-02-13 10:52:23', 29.79, 'Credit Card', 'Bestellt'),
+(25, 15, '2025-02-13 10:54:22', 29.79, 'Credit Card', 'Bestellt'),
+(26, 15, '2025-02-13 10:54:58', 29.79, 'Credit Card', 'Bestellt'),
+(27, 15, '2025-02-13 10:57:07', 13.98, 'Credit Card', 'Bestellt'),
+(28, 15, '2025-02-13 10:57:24', 13.98, 'Credit Card', 'Bestellt'),
+(29, 15, '2025-02-14 10:29:25', 29.79, 'Barzahlung', 'Bestellt'),
+(30, 15, '2025-02-14 10:29:37', 29.79, 'Barzahlung', 'Bestellt'),
+(31, 15, '2025-02-14 10:30:43', 37.78, 'Credit Card', 'Bestellt'),
+(32, 15, '2025-02-14 10:31:19', 37.78, 'Credit Card', 'Bestellt'),
+(33, 15, '2025-02-14 10:32:46', 37.78, 'Credit Card', 'Bestellt');
 
 -- --------------------------------------------------------
 
@@ -143,17 +189,19 @@ CREATE TABLE `bewertung` (
   `BewertungsID` int(11) NOT NULL,
   `BildID` int(11) DEFAULT NULL,
   `KundenID` int(11) DEFAULT NULL,
-  `Bewertungsdatum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Bewertungsdatum` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `IstAktiv` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bewertung`
 --
 
-INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungsdatum`) VALUES
-(2, 2, 2, '2025-02-04 11:33:13'),
-(6, 1, 1, '2025-02-04 11:33:13'),
-(7, 2, 2, '2025-02-04 11:33:13');
+INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungsdatum`, `IstAktiv`) VALUES
+(25, 2, 15, '2025-02-14 10:30:07', 0),
+(26, 1, 15, '2025-02-14 10:30:01', 1),
+(27, 3, 15, '2025-02-14 10:30:06', 0),
+(28, 4, 15, '2025-02-13 08:05:38', 1);
 
 -- --------------------------------------------------------
 
@@ -183,7 +231,15 @@ INSERT INTO `bild` (`BildID`, `KundenID`, `Bilddatei`, `Titel`, `Hochladedatum`,
 (5, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 10:59:44', 0, NULL),
 (6, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 11:00:24', 0, NULL),
 (7, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'wow crazy', '2025-02-06 11:00:27', 0, NULL),
-(8, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'ioanan', '2025-02-06 11:12:56', 0, NULL);
+(8, NULL, 'https://th.bing.com/th/id/OIP.mbZihwjVbGtcHBhGFRR5cQHaF3?w=193&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7', 'ioanan', '2025-02-06 11:12:56', 0, NULL),
+(9, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'burger', '2025-02-13 11:15:43', 0, NULL),
+(10, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'jsdf', '2025-02-13 11:16:20', 0, NULL),
+(11, 15, 'https://png.pngtaddree.cadom/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.pnqdg', 'wow crazy', '2025-02-13 11:16:39', 0, NULL),
+(12, 15, 'https://png.pngtaddree.cadom/pnadg-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.pnadadqdg', 'wow crazy', '2025-02-13 11:17:10', 0, NULL),
+(13, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-13 11:40:59', 0, NULL),
+(14, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-13 11:42:52', 0, NULL),
+(15, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-13 11:44:58', 0, NULL),
+(16, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-14 10:30:18', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -217,7 +273,7 @@ INSERT INTO `kunde` (`KundenID`, `Vorname`, `Nachname`, `EMail`, `Password_Hash`
 (12, 'test', 'test', 'tq234est2@test.test', '$2y$10$DG6s8RzGRNqHNAxjoZsmKO9o.Op/KMDqlhcQZzROQD2h/ogkPBVOy', NULL, NULL),
 (13, 'test', 'test', 'tq2343rest2@test.test', '$2y$10$Qe5H/WKecR986jJusLv8UeRL8p.bEy.cxcfEJXMcmBDlfNKhfRdFi', NULL, NULL),
 (14, 'wfkjegjk', 'kgniegn', 'qwsdfse@zsdfsfz.de', '$2y$10$AmtLOC9Pwy45ecarFy67/.8eWqcYhWl.k6jIDGjEc1MNTG1J77tdO', NULL, NULL),
-(15, 'user', 'user', 'user@user.user', '$2y$10$/.y2KwEe.enPGXM9SHtKIuIFy3TEvuQ8j5qATtUyFRc9aCGH7hWpa', NULL, NULL);
+(15, 'user', 'user', 'user@user.user', '$2y$10$/.y2KwEe.enPGXM9SHtKIuIFy3TEvuQ8j5qATtUyFRc9aCGH7hWpa', NULL, 11);
 
 -- --------------------------------------------------------
 
@@ -287,9 +343,7 @@ CREATE TABLE `produkt` (
 INSERT INTO `produkt` (`ProduktID`, `Produktname`, `Beschreibung`, `Preis`, `Energiewert`, `BildURL`) VALUES
 (1, 'Pizza Margherita', 'Classic pizza with tomato, mozzarella, and basil', 8.99, 200, ''),
 (2, 'Burger', 'Juicy beef burger with lettuce and cheese', 5.99, 400, ''),
-(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/pommes.webp'),
-(6, 'test', '123', 10.00, 10, '11'),
-(7, 'appling', 'sgsf', 15.00, 200, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/pommes.webp');
+(3, 'Pasta Bolognese', 'Pasta with rich bolognese sauce', 7.99, 350, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/pommes.webp');
 
 -- --------------------------------------------------------
 
@@ -473,25 +527,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `AdresseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `AdresseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `bestellung`
 --
 ALTER TABLE `bestellung`
-  MODIFY `BestellID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `BestellID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `bewertung`
 --
 ALTER TABLE `bewertung`
-  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `BewertungsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `bild`
 --
 ALTER TABLE `bild`
-  MODIFY `BildID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `BildID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `kunde`
