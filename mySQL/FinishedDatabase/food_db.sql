@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2025 at 11:44 AM
+-- Generation Time: Mar 17, 2025 at 11:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -55,20 +55,21 @@ CREATE TABLE `adresse` (
   `Strasse` varchar(100) DEFAULT NULL,
   `Hausnummer` varchar(10) DEFAULT NULL,
   `Postleitzahl` varchar(10) DEFAULT NULL,
-  `Stadt` varchar(50) DEFAULT NULL
+  `Stadt` varchar(50) DEFAULT NULL,
+  `Land` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `adresse`
 --
 
-INSERT INTO `adresse` (`AdresseID`, `Strasse`, `Hausnummer`, `Postleitzahl`, `Stadt`) VALUES
-(1, 'Main Street jjjj', '123', '10115', 'Munich'),
-(2, 'Oak Road', '456', '10234', 'Munich'),
-(3, 'hshshshshs', '111', '90517', 'fuerth'),
-(9, 'test', '1', '90517', 'fuerth'),
-(10, 'hshshshshs', '111', '90517', 'fuerth'),
-(11, 'afaf', '1', '9093', 'fdwd');
+INSERT INTO `adresse` (`AdresseID`, `Strasse`, `Hausnummer`, `Postleitzahl`, `Stadt`, `Land`) VALUES
+(1, 'Main Street jjjj', '123', '10115', 'Munich', ''),
+(2, 'Oak Road', '456', '10234', 'Munich', ''),
+(3, 'hshshshshs', '111', '90517', 'fuerth', ''),
+(9, 'test', '1', '90517', 'fuerth', ''),
+(10, 'hshshshshs', '111', '90517', 'fuerth', ''),
+(11, 'afaf', '1', '9093', 'jhjj', '');
 
 -- --------------------------------------------------------
 
@@ -198,9 +199,9 @@ CREATE TABLE `bewertung` (
 --
 
 INSERT INTO `bewertung` (`BewertungsID`, `BildID`, `KundenID`, `Bewertungsdatum`, `IstAktiv`) VALUES
-(25, 2, 15, '2025-02-14 10:30:07', 0),
+(25, 2, 15, '2025-02-17 11:20:36', 0),
 (26, 1, 15, '2025-02-14 10:30:01', 1),
-(27, 3, 15, '2025-02-14 10:30:06', 0),
+(27, 3, 15, '2025-03-13 08:38:47', 1),
 (28, 4, 15, '2025-02-13 08:05:38', 1);
 
 -- --------------------------------------------------------
@@ -239,7 +240,9 @@ INSERT INTO `bild` (`BildID`, `KundenID`, `Bilddatei`, `Titel`, `Hochladedatum`,
 (13, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-13 11:40:59', 0, NULL),
 (14, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-13 11:42:52', 0, NULL),
 (15, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-13 11:44:58', 0, NULL),
-(16, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-14 10:30:18', 0, NULL);
+(16, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-14 10:30:18', 0, NULL),
+(17, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-17 10:53:26', 0, NULL),
+(18, 15, 'https://png.pngtree.com/png-clipart/20221001/original/pngtree-fast-food-big-ham-burger-png-image_8648590.png', 'wow crazy', '2025-02-17 10:54:29', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -254,26 +257,27 @@ CREATE TABLE `kunde` (
   `EMail` varchar(100) NOT NULL,
   `Password_Hash` varchar(255) NOT NULL,
   `Telefon` varchar(20) DEFAULT NULL,
-  `AdresseID` int(11) DEFAULT NULL
+  `AdresseID` int(11) DEFAULT NULL,
+  `Status` enum('aktiv','gelöscht') NOT NULL DEFAULT 'aktiv'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kunde`
 --
 
-INSERT INTO `kunde` (`KundenID`, `Vorname`, `Nachname`, `EMail`, `Password_Hash`, `Telefon`, `AdresseID`) VALUES
-(1, 'Max', 'Mustermann', 'max@example.com', 'hashed_password_1', '1234567890', 1),
-(2, 'Anna', 'Müller', 'anna@example.com', 'hashed_password_2', '0987654321', 2),
-(3, 'John', 'Doe', 'john@example.com', 'hashed_password_3', '1122334455', 3),
-(7, 'test', 'test', 'test@test.test', '$2y$10$bYnyBe3TUyXmTFeMzVcc2.Atf/ZssudsE89edY3MBYF8CKAiDT7O6', NULL, NULL),
-(8, 'test', 'test', 'test1@test.test', '$2y$10$tUjHc7dNIl4gENSUtFwIeOLqMAAxxKNU.PMXdzEaC3.mNHYElxXv2', NULL, NULL),
-(9, 'test', 'test', 'test2@test.test', '$2y$10$LUgbcy5UtijAWmbMJSI7Ye4oIIACWwadw9x0FkjfQudo5y/vCQsHK', NULL, NULL),
-(10, 'ere', 'wrwr', 'tester2@test.test', '$2y$10$bkvXjYA7OnTnyH.fAY8.Le7s7GX3db60BqjGkKnq5XbA74jKx/Xmi', NULL, NULL),
-(11, 'test', 'test', 'testwer2@test.test', '$2y$10$ME/ExqbsSv6N95eOYeoPWOWchjdAQTdPLc8HBFfiS0fNYO8v6G42q', NULL, NULL),
-(12, 'test', 'test', 'tq234est2@test.test', '$2y$10$DG6s8RzGRNqHNAxjoZsmKO9o.Op/KMDqlhcQZzROQD2h/ogkPBVOy', NULL, NULL),
-(13, 'test', 'test', 'tq2343rest2@test.test', '$2y$10$Qe5H/WKecR986jJusLv8UeRL8p.bEy.cxcfEJXMcmBDlfNKhfRdFi', NULL, NULL),
-(14, 'wfkjegjk', 'kgniegn', 'qwsdfse@zsdfsfz.de', '$2y$10$AmtLOC9Pwy45ecarFy67/.8eWqcYhWl.k6jIDGjEc1MNTG1J77tdO', NULL, NULL),
-(15, 'user', 'user', 'user@user.user', '$2y$10$/.y2KwEe.enPGXM9SHtKIuIFy3TEvuQ8j5qATtUyFRc9aCGH7hWpa', NULL, 11);
+INSERT INTO `kunde` (`KundenID`, `Vorname`, `Nachname`, `EMail`, `Password_Hash`, `Telefon`, `AdresseID`, `Status`) VALUES
+(1, 'Max', 'Mustermann', 'max@example.com', 'hashed_password_1', '1234567890', 1, 'aktiv'),
+(2, 'Anna', 'Müller', 'anna@example.com', 'hashed_password_2', '0987654321', 2, 'aktiv'),
+(3, 'John', 'Doe', 'john@example.com', 'hashed_password_3', '1122334455', 3, 'aktiv'),
+(7, 'test', 'test', 'test@test.test', '$2y$10$bYnyBe3TUyXmTFeMzVcc2.Atf/ZssudsE89edY3MBYF8CKAiDT7O6', NULL, NULL, 'aktiv'),
+(8, 'test', 'test', 'test1@test.test', '$2y$10$tUjHc7dNIl4gENSUtFwIeOLqMAAxxKNU.PMXdzEaC3.mNHYElxXv2', NULL, NULL, 'aktiv'),
+(9, 'test', 'test', 'test2@test.test', '$2y$10$LUgbcy5UtijAWmbMJSI7Ye4oIIACWwadw9x0FkjfQudo5y/vCQsHK', NULL, NULL, 'aktiv'),
+(10, 'ere', 'wrwr', 'tester2@test.test', '$2y$10$bkvXjYA7OnTnyH.fAY8.Le7s7GX3db60BqjGkKnq5XbA74jKx/Xmi', NULL, NULL, 'aktiv'),
+(11, 'test', 'test', 'testwer2@test.test', '$2y$10$ME/ExqbsSv6N95eOYeoPWOWchjdAQTdPLc8HBFfiS0fNYO8v6G42q', NULL, NULL, 'aktiv'),
+(12, 'test', 'test', 'tq234est2@test.test', '$2y$10$DG6s8RzGRNqHNAxjoZsmKO9o.Op/KMDqlhcQZzROQD2h/ogkPBVOy', NULL, NULL, 'aktiv'),
+(13, 'test', 'test', 'tq2343rest2@test.test', '$2y$10$Qe5H/WKecR986jJusLv8UeRL8p.bEy.cxcfEJXMcmBDlfNKhfRdFi', NULL, NULL, 'aktiv'),
+(14, 'wfkjegjk', 'kgniegn', 'qwsdfse@zsdfsfz.de', '$2y$10$AmtLOC9Pwy45ecarFy67/.8eWqcYhWl.k6jIDGjEc1MNTG1J77tdO', NULL, NULL, 'aktiv'),
+(15, 'user', 'user', 'user@user.user', '$2y$10$/.y2KwEe.enPGXM9SHtKIuIFy3TEvuQ8j5qATtUyFRc9aCGH7hWpa', '', 11, 'aktiv');
 
 -- --------------------------------------------------------
 
@@ -545,7 +549,7 @@ ALTER TABLE `bewertung`
 -- AUTO_INCREMENT for table `bild`
 --
 ALTER TABLE `bild`
-  MODIFY `BildID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `BildID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `kunde`
