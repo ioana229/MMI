@@ -292,10 +292,10 @@ CREATE TABLE `produkt` (
 
 INSERT INTO `produkt` (`ProduktID`, `Produktname`, `Beschreibung`, `Preis`, `Energiewert`, `BildURL`) VALUES
 (1, 'Avocado-Tomaten-Toast', 'Vollkornbrot mit cremiger Avocado, frischen Tomaten und einem Hauch Zitronensaft.', 7.99, 350, 'https://www.eatwholly.com/wp-content/uploads/2022/07/wholly-pan-roasted-tomato-avocado-toast-chunky.jpg'),
-(2, 'Griechischer Salat', ' Ein klassischer griechischer Salat mit Gurke, Feta, Oliven und roten Zwiebeln.', 8.99, 300, 'https://cupfulofkale.com/wp-content/uploads/2023/05/Vegan-Greek-Salad.jpg.webp'),
-(3, 'Veggie Wrap', 'Ein Wrap mit gegrilltem Gemüse, Salat und einer leichten Joghurt-Kräuter-Sauce.', 6.99, 400, 'https://shopifyapp.teamiblends.com/assets/uploads/recipes-blogs/grilled%20veggie%20wrap.png'),
-(4, 'Hummus mit Gemüsesticks', 'Cremiger Hummus, serviert mit frischen Gemüsesticks wie Karotten, Sellerie und Paprika.', 3.99, 250, 'https://rezept-db.womenshealth.de/image/rezept-db/jsonLd1x1/1619969398832-608ec576b415da0007c3ce6e.webp'),
-(5, 'Hühnchen mit Honig-Senf-Dressing', 'Gegrilltes Hühnchen, serviert mit einem süß-sauren Honig-Senf-Dressing und einem Salat.', 11.99, 450, 'https://www.leckerschmecker.me/wp-content/uploads/sites/6/2024/10/honig-senf-haehnchen.jpeg?w=1200'),
+(2, 'Griechischer Salat', ' Ein klassischer griechischer Salat.', 8.99, 300, 'https://cupfulofkale.com/wp-content/uploads/2023/05/Vegan-Greek-Salad.jpg.webp'),
+(3, 'Veggie Wrap', 'Ein Wrap mit gegrilltem Gemüse.', 6.99, 400, 'https://shopifyapp.teamiblends.com/assets/uploads/recipes-blogs/grilled%20veggie%20wrap.png'),
+(4, 'Hummus mit Gemüsesticks', 'Cremiger Hummus, serviert mit frischen Gemüsesticks.', 3.99, 250, 'https://rezept-db.womenshealth.de/image/rezept-db/jsonLd1x1/1619969398832-608ec576b415da0007c3ce6e.webp'),
+(5, 'Hühnchen mit Honig-Senf-Dressing', 'Gegrilltes Hühnchen.', 11.99, 450, 'https://www.leckerschmecker.me/wp-content/uploads/sites/6/2024/10/honig-senf-haehnchen.jpeg?w=1200'),
 (6, 'Gebackene Süßkartoffeln', 'Gebackene Süßkartoffeln, gewürzt mit Rosmarin und Knoblauch.', 4.99, 300, 'https://cdn.gutekueche.de/media/recipe/72495/gebackene-suesskartoffel-mit-chili-con-carne.jpg'),
 (7, 'Caesar Salad (leichte Version)', 'Ein klassischer Caesar Salad, leicht abgewandelt mit griechischem Joghurt statt Mayonnaise.', 6.99, 350, 'https://cookingwithayeh.com/wp-content/uploads/2023/11/Healthy-Caesar-Salad-Without-Anchovies-SQ-5.jpg'),
 (8, 'Pesto-Zucchini-Nudeln', 'Zucchini-Nudeln mit frischem Basilikum-Pesto und Pinienkernen.', 13.99, 400, 'https://images.eatsmarter.de/sites/default/files/styles/1600x1200/public/zucchininudeln-mit-rucola-pesto-und-haehnchenbrust-654643.jpg'),
