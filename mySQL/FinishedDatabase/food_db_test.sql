@@ -225,10 +225,10 @@ CREATE TABLE `menue` (
 --
 
 INSERT INTO `menue` (`MenueID`, `Menuename`, `Beschreibung`, `DiscountPreis`, `NormalPreis`, `BildURL`) VALUES
-(1, 'AvocadoHeaven', 'Unsere besten Avocado Speisen in einem Menü', 18.29, 21.47, '#TODO'),
-(2, 'FamilyDinner', 'Eine grosse Auswahl für die ganze Familie', 62.39, 73.38, '#TODO'),
-(3, 'DrinkMix', 'Alle unsere Erfrischungen in einem Menü', 33.09, 38.94, '#TODO'),
-(4, 'MacApple Favorite', 'Unnsere Lieblingsprodukte in einem Menü', 21.29, 24.96, '#TODO');
+(1, 'AvocadoHeaven', 'Unsere besten Avocado Speisen in einem Menü', 18.29, 21.47, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/Nr1.png'),
+(2, 'FamilyDinner', 'Eine grosse Auswahl für die ganze Familie', 62.39, 73.38, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/Nr2.png'),
+(3, 'DrinkMix', 'Alle unsere Erfrischungen in einem Menü', 33.09, 38.94, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/Nr3.png'),
+(4, 'MacApple Favorite', 'Unnsere Lieblingsprodukte in einem Menü', 21.29, 24.96, 'https://raw.githubusercontent.com/ioana229/MMI/refs/heads/main/Pics/Nr4.png');
 
 -- --------------------------------------------------------
 
